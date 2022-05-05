@@ -1,12 +1,10 @@
-     import  {readFile, readFileSync, writeFile} from 'fs'
+     import  {readFile, readFileSync, writeFile, writeFileSync, existsSync} from 'fs'
      import {join, resolve } from 'path'
 
-     
-
      class CalendarApp { 
-            constructor (private date_: string, private description_: string | ''){}
+            constructor (private date_: Date, private description_: string){}
 
-            get date () : string {
+            get date () : Date {
                   return this.date_;
             }
             get description(): string {
@@ -15,29 +13,24 @@
       } 
 
       interface IEventManegment  {
-            addEvent(eventData: TEventDataFormat) :Promise <Boolean> 
+            addEvent(eventData: TEventDataFormat):void
             createEvent() : boolean
-            readEvents() : string 
+            readEvents() : string
       }
 
       type TEventDataFormat =  {
             id:string,
             date: Date,
-            description:string
+            description:string 
       }
-      
+      const PATH_TO_FILE_JSON = join(resolve(), 'src', '__test/events/', 'other.json')
       class EventManegment implements IEventManegment  {
-            async addEvent  () : Promise<Boolean> {
-                await writeFile(join(resolve(), 'src', '__test', 'events/events.json'), 'eventcontent', (err: Error | null)=>{
-                        if(err) return false
-                  }    )
-                  return true;  
-                  }
-            readEvents() : string {          
-
-                  let value =  readFileSync(join(resolve(), 'src', '__test', 'events/events.json'),{encoding:'utf-8'})
-
-                  return value
+            addEvent({id, date,description }: TEventDataFormat) : void{    
+                   writeFileSync(PATH_TO_FILE_JSON, JSON.stringify([{id, date, description}]))  
+             }
+            readEvents(): string{        
+                  const name=  readFileSync(PATH_TO_FILE_JSON,{encoding:'utf-8'}) 
+                  return name       
             }  
             createEvent() : boolean {
                   return true
@@ -46,17 +39,18 @@
 
 describe('Should be return event data in Calendar App', ()=> {
      it('should be retur the data event', ()=> {
-          const cDate = new CalendarApp('28042022', "my event to go party");
+          const cDate = new CalendarApp( new Date, "my event to go party");
            expect(cDate.date).toBe('28042022')
      })
 })
 describe('Should be managment an event in EventManegment', ()=> {
      it('should be create an event', async ()=> {
           const createEvent = new EventManegment()
-           expect( await createEvent.addEvent()).toBe(true)
+           expect(await createEvent.addEvent({id: '2', date: new Date(), description:'Time to at party'})).toBeUndefined()
      })
      it('should be read all event', ()=> {
           const createEvent = new EventManegment()
-           expect(createEvent.readEvents()).toEqual('eventcontent')
+           const value = JSON.stringify([{id: '2', date: new Date(), description:'Time to at party'}])
+           expect(createEvent.readEvents()).toEqual(value)
      })
 })
