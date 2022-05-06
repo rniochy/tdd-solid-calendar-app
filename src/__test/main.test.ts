@@ -43,9 +43,7 @@ class CalendarApp {
       
       class EventManegment implements IEventManegment  {
             editEvent({date, description,id}:TEventDataFormat): void {
-                  const eventsList: Array<TEventDataFormat> = this.readEvents()
-
-                 
+                  const eventsList: Array<TEventDataFormat> = this.readEvents()     
             }
               
             deleteEvent(id: Date): void {             
@@ -56,7 +54,7 @@ class CalendarApp {
             }
 
             addEvent({date,description }: TEventDataFormat) : void{ 
-                  const id = crypto.randomUUID()
+                  const id:string =  crypto.randomUUID() 
                   const eventToSave = {id, date, description}
                   const array_with_events = this.readEvents()
 
