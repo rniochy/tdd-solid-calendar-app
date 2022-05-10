@@ -48,13 +48,13 @@ class CalendarApp {
               
             deleteEvent(id: Date): void {             
                   const eventsList: Array<TEventDataFormat> = this.readEvents()
-                  eventsList.push({id: "4", date: new Date(), description: "some TTevent"})
+                  eventsList.push({id: "4", date: new Date(), description: "some event"})
                   const newDataForEventsList = eventsList.filter(events =>  +events.id !==  5); 
                   writeFileSync(PATH_TO_FILE_JSON, JSON.stringify(newDataForEventsList ))
             }
 
             addEvent({date,description }: TEventDataFormat) : void{ 
-                  const id:string =  crypto.randomUUID() 
+                  const id:string = '5' //crypto.randomUUID(crypto.) 
                   const eventToSave = {id, date, description}
                   const array_with_events = this.readEvents()
 
