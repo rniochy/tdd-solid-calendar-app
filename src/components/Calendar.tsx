@@ -62,11 +62,11 @@ import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState } f
                 days = React.createElement('li', {className: 'active'}, day )
                 daysArr.push(days)        
              } else {
-                days = React.createElement('li', {className: 'active'}, day )
+                days = React.createElement('li', {}, day )
                 daysArr.push(days)      
              }
 
-        }  setDayList(React.createElement('ul', {className: "days"}, daysArr))
+        }   setDayList(React.createElement('ul', {className: "days"}, daysArr))
     }
 
     return ( 
@@ -92,8 +92,7 @@ import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState } f
                     <li>Fr</li>
                     <li>Sa</li>
                     <li>Su</li>
-                </ul>
-                
+                </ul>   
                        {dayList}
             </section>
         </div>

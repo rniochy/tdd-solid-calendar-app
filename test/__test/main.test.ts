@@ -17,7 +17,7 @@ class CalendarApp {
 
       interface IEventManegment  {
             addEvent( {date, description}: TEventDataFormat):void
-            deleteEvent(id: Date) : void
+            deleteEvent(id: string) : void
             readEvents() : TEventDataFormat[]
             editEvent(pros:TEventDataFormat): void
       }
@@ -27,6 +27,10 @@ class CalendarApp {
             date: Date,
             description:string 
       }
+
+       interface IIdGenerator {
+              idGerator() : string
+       }
 
       // interface IDataFormat {
       //        idFormat(id:string): string
@@ -41,20 +45,22 @@ class CalendarApp {
       //       }       
       // }
       
-      class EventManegment implements IEventManegment  {
+      class EventManegment implements IEventManegment, IIdGenerator  {
+            idGerator(): string {
+                  return Math.random().toString(36).substring(2, 9)
+            }
             editEvent({date, description,id}:TEventDataFormat): void {
                   const eventsList: Array<TEventDataFormat> = this.readEvents()     
             }
               
-            deleteEvent(id: Date): void {             
+            deleteEvent(id: string): void {             
                   const eventsList: Array<TEventDataFormat> = this.readEvents()
-                  eventsList.push({id: "4", date: new Date(), description: "some event"})
-                  const newDataForEventsList = eventsList.filter(events =>  +events.id !==  5); 
+                  const newDataForEventsList = eventsList.filter(events =>  events.id !==  id); 
                   writeFileSync(PATH_TO_FILE_JSON, JSON.stringify(newDataForEventsList ))
             }
 
             addEvent({date,description }: TEventDataFormat) : void{ 
-                  const id:string = '5' //crypto.randomUUID(crypto.) 
+                  const id:string = this.idGerator(); 
                   const eventToSave = {id, date, description}
                   const array_with_events = this.readEvents()
 
@@ -68,7 +74,7 @@ class CalendarApp {
             readEvents(): TEventDataFormat[] {        
                   const value = readFileSync(PATH_TO_FILE_JSON,{encoding:'utf-8'}) 
                   if(value) return JSON.parse(value) 
-                  return []     
+                  return JSON.parse(value)   
             }  
       }
 
@@ -80,17 +86,23 @@ describe('Should be return event data in Calendar App', ()=> {
      })
 })
 describe('Should be managment an event in EventManegment', ()=> {
+      
      it('should be create an event',()=> {
           const createEvent = new EventManegment()
            expect(createEvent.addEvent({id:"",date: new Date(), description:' to at party'})).toBeUndefined()
      })
 
      it('should be read all event', ()=> {
+      type TEventDataFormat =  {
+            id:string,
+            date: Date,
+            description:string 
+      }
             const createEvent = new EventManegment()
             expect(createEvent.readEvents()).toBeTruthy()
      })
      it('should be delete a event', ()=> {
           const createEvent = new EventManegment()
-           expect(createEvent.deleteEvent(new Date)).toBeUndefined();
+           expect(createEvent.deleteEvent("2y7juua")).toBeUndefined();
      })
 })
