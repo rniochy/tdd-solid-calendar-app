@@ -1,5 +1,8 @@
-import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState } from "react";
+import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState, useRef } from "react";
 import './calendar.css'
+import CalendarData from "./CalendarData";
+import EventDescription from "./EventDescription";
+import HeaderCalendar from "./HeaderCalendar";
 
  const  Calendar: React.FC = () => {
     const [dayList, setDayList] = useState<DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>>();
@@ -9,7 +12,6 @@ import './calendar.css'
     const [date, setDate] = useState<Date>(new Date())
     const [month, setMonth] = useState<number>(date.getMonth()+1)
     const [year, setYear] = useState<number>(date.getFullYear())
-    const [days, setDays] = useState<number>()
     const [currentDay, setCurrentDay] = useState<number>(date.getDate())
   
     const monthNames:Array<string> = ['January', 'February', 'March',  'April', 'May',
@@ -18,6 +20,8 @@ import './calendar.css'
      useEffect(()=> {
           calendar()
      }, []);
+
+    const clickDayCalendar = useRef<HTMLInputElement | null >(null)
 
     const nextMonth = (): void =>{
         if(month === 12) {
@@ -38,7 +42,11 @@ import './calendar.css'
         calendar()
     }
     const handlerClickEvent = (e: React.MouseEvent<HTMLUListElement>): void => {
-        console.log(e)
+        clickDayCalendar.current?.focus()
+        console.log(`${e.currentTarget.getAttribute('value')} ${month} ${year}` )
+    }
+    const handlerOnClickChangeData = (e: React.MouseEvent<HTMLUListElement>)=> {
+        console.log(e.currentTarget.TEXT_NODE)
     }
     const calendar = (): void => {
         let amountDaysInMonth:number = new Date(year, month, 0).getDate()
@@ -77,39 +85,17 @@ import './calendar.css'
             <div className="container">
                 <aside>
                     <ul>
-                        <li>Atual Date</li>
-                        <li>Past Month</li>
-                        <li>Past Year</li>
-                        <li>Past  3 Months</li>
-                        <li>Past 6 Months</li>
-                        <li>Past Century</li>
+                        <li onClick={()=> handlerOnClickChangeData}>Atual Date</li>
+                        <li onClick={()=>handlerOnClickChangeData}>Past Month</li>
+                        <li onClick={()=>handlerOnClickChangeData}>Past Year</li>
+                        <li onClick={()=>handlerOnClickChangeData}>Past  3 Months</li>
+                        <li onClick={()=>handlerOnClickChangeData}>Past 6 Months</li>
+                        <li onClick={()=>handlerOnClickChangeData}>Past Century</li>
                     </ul>
                 </aside>
                 <div className="calendarContainer">
-                            <p className="datedisplay">{datetDisplay}</p>   
-                    <section className="data_month_and_year">
-                        <ul>
-                            <article className="prevMothnext">
-                                <li onClick={previousMonth} className="prev">&#10094;</li>
-                                <li className="monthTitle"><span style={{fontSize:"18px"}} className="month-name">{monthName}</span></li>  
-                                <li onClick={nextMonth} className="next">&#10095;</li>
-                            </article>
-                        </ul>
-                                <span className='year'>{ yearName}</span>
-                    </section>
-                    <section className="calendarData">
-                        <ul className="weekdays">
-                            <li>Mo</li>
-                            <li>Tu</li>
-                            <li>We</li>
-                            <li>Th</li>
-                            <li>Fr</li>
-                            <li>Sa</li>
-                            <li>Su</li>
-                        </ul>   
-                            {dayList}
-
-                    </section>
+                    <HeaderCalendar datetDisplay = {datetDisplay} previousMonth ={previousMonth} nextMonth={nextMonth}  monthName={monthName} yearName={yearName} />
+                    <CalendarData dayList ={dayList}/>
                 </div>
                 <aside className="eventList">
                     <ul>
@@ -124,14 +110,7 @@ import './calendar.css'
                         </dl>
                     </ul>
                 </aside>
-                    <section className="form_data">
-                        <form className="eventDescription" action="#">
-                                <fieldset>
-                                    <legend>Event Descrition</legend>
-                                    <input  type="text" placeholder="Describe your event"/> <input  type="submit"  value="Save"/> 
-                                </fieldset>
-                        </form>
-                    </section>
+                    <EventDescription clickDayCalendar={clickDayCalendar}/>
             </div>
     </>
     );

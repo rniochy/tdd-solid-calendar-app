@@ -96,17 +96,18 @@ aside {
 }
 
 .container  aside:nth-child(1) li {
-     line-height: 0.7rem;
-     width: fit-content;   
+     height: 1.4rem;
+     width: 6rem;   
      text-align: center;
      font-size: 16pt;
      margin-bottom: 0.2rem;
-     border-radius: 1rem;
+     border-radius: 0.3rem;
      padding: 0.2rem;
-     transition: 900ms ease-in-out;  
+     border: 1px solid #ccc;
 }
 .container  aside:nth-child(1) li:hover {
-     border: 1px solid #ccc;   
+     border: 1px solid #666;   
+     transition: 500ms ease-in-out;  
 }
 .container  aside:nth-child(3) li {
       background-color: red;
@@ -118,7 +119,7 @@ aside {
       height: max-content;
       align-self: flex-end;
       justify-content: center;
-      margin-bottom: 5.5rem;
+      margin: 0.3rem 0 5.5rem 0;
       grid-column: 1/4;
 }
 form  input {
