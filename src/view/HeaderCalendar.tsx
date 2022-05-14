@@ -4,7 +4,7 @@ type THeaderCalendarProps = {
     previousMonth: ()=> void, 
     nextMonth:()=> void,  
     monthName: string | undefined, 
-    yearName: number 
+    yearName?: number 
 }
 
 function HeaderCalendar ({datetDisplay,previousMonth, nextMonth,  monthName, yearName }: THeaderCalendarProps ) {

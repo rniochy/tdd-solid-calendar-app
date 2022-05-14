@@ -1,4 +1,4 @@
-import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState, useRef } from "react";
+import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState, useRef} from "react";
 import './calendar.css'
 import CalendarData from "./CalendarData";
 import EventDescription from "./EventDescription";
@@ -45,9 +45,46 @@ import HeaderCalendar from "./HeaderCalendar";
         clickDayCalendar.current?.focus()
         console.log(`${e.currentTarget.getAttribute('value')} ${month} ${year}` )
     }
-    const handlerOnClickChangeData = (e: React.MouseEvent<HTMLUListElement>)=> {
-        console.log(e.currentTarget.TEXT_NODE)
-    }
+    function handlerOnClickChangeData(e: React.MouseEvent<HTMLLIElement> ): void {
+            switch(e.currentTarget.getAttribute('value')){
+                case '1' :  
+                setMonth(date.getMonth()+1)
+                setYear(date.getFullYear())
+                calendar() 
+                break;
+                case '2' : 
+                    previousMonth()
+                break;
+                case '3' :  setYear(year -1)
+                calendar()
+                break;
+                case '4' :
+                    if(month < 3 || month === 0){
+                        setMonth(12 - (3 - month))
+                        setYear(year -1)
+                    } else {
+
+                        setMonth(month -3)
+                    }
+                    calendar()
+                    break;
+                    case '5' :  
+                        if(month < 6 || month === 0){
+                            setMonth(12 - (6 - month))
+                            setYear(year -1)
+                        } else {
+
+                            setMonth(month -6)
+                        }
+                        calendar()
+                break;
+                case '6' :  
+                    year > 0  && setYear(year -100)
+                    calendar()
+                break;
+                default: ''
+            }
+     }
     const calendar = (): void => {
         let amountDaysInMonth:number = new Date(year, month, 0).getDate()
         let amountDaysAtWeek:number = new Date(year, month-1, 1).getDay()
@@ -85,12 +122,12 @@ import HeaderCalendar from "./HeaderCalendar";
             <div className="container">
                 <aside>
                     <ul>
-                        <li onClick={()=> handlerOnClickChangeData}>Atual Date</li>
-                        <li onClick={()=>handlerOnClickChangeData}>Past Month</li>
-                        <li onClick={()=>handlerOnClickChangeData}>Past Year</li>
-                        <li onClick={()=>handlerOnClickChangeData}>Past  3 Months</li>
-                        <li onClick={()=>handlerOnClickChangeData}>Past 6 Months</li>
-                        <li onClick={()=>handlerOnClickChangeData}>Past Century</li>
+                        <li  value= '1' onClick={handlerOnClickChangeData}>Atual Date</li>
+                        <li  value= '2' onClick={handlerOnClickChangeData} >Past Month</li>
+                        <li  value= '3' onClick={handlerOnClickChangeData} >Past Year</li>
+                        <li  value= '4' onClick={handlerOnClickChangeData} >Past  3 Months</li>
+                        <li  value= '5' onClick={handlerOnClickChangeData} >Past 6 Months</li>
+                        <li  value= '6' onClick={handlerOnClickChangeData} >Past Century</li>
                     </ul>
                 </aside>
                 <div className="calendarContainer">
@@ -110,7 +147,7 @@ import HeaderCalendar from "./HeaderCalendar";
                         </dl>
                     </ul>
                 </aside>
-                    <EventDescription clickDayCalendar={clickDayCalendar}/>
+                    <EventDescription clickDayRef={clickDayCalendar}/>
             </div>
     </>
     );

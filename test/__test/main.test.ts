@@ -1,8 +1,9 @@
 import  {readFile, readFileSync, writeFile, writeFileSync, existsSync} from 'fs'
 import {join, resolve } from 'path'
 import crypto from 'crypto' 
+import { idText } from 'typescript';
 
-const PATH_TO_FILE_JSON = join(resolve(), 'src', '__test/events/', 'other.json')
+const PATH_TO_FILE_JSON = join(resolve(), 'test', '__test/events/', 'other.json')
 
 class CalendarApp { 
       constructor (private date_: Date, private description_: string){}
@@ -49,8 +50,17 @@ class CalendarApp {
             idGerator(): string {
                   return Math.random().toString(36).substring(2, 9)
             }
-            editEvent({date, description,id}:TEventDataFormat): void {
-                  const eventsList: Array<TEventDataFormat> = this.readEvents()     
+            editEvent({date, description,id}:TEventDataFormat): TEventDataFormat[] {
+                  const eventsList: Array<TEventDataFormat> = this.readEvents()  
+                  const upDateArray = eventsList.filter(event => event.id !== id)   
+                  const valueToEdit = eventsList.filter(event => event.id === id)
+                  valueToEdit.forEach(value => {
+                         description ? value.description = description : ''
+                         date ? value.date = date : ''
+                  } )   
+                  upDateArray.push({id: id, description: valueToEdit[0].description, date: valueToEdit[0].date})
+                  writeFileSync(PATH_TO_FILE_JSON, JSON.stringify(upDateArray))
+                  return eventsList
             }
               
             deleteEvent(id: string): void {             
@@ -73,8 +83,8 @@ class CalendarApp {
              }
             readEvents(): TEventDataFormat[] {        
                   const value = readFileSync(PATH_TO_FILE_JSON,{encoding:'utf-8'}) 
-                  if(value) return JSON.parse(value) 
-                  return JSON.parse(value)   
+                   if(value) return JSON.parse(value)
+                     return []
             }  
       }
 
@@ -105,4 +115,8 @@ describe('Should be managment an event in EventManegment', ()=> {
           const createEvent = new EventManegment()
            expect(createEvent.deleteEvent("2y7juua")).toBeUndefined();
      })
+     it('should be edit a event', ()=> {
+          const createEvent = new EventManegment()
+           expect(createEvent.editEvent({id: '9ad14px', date: new Date(), description: "Other"})).toBeTruthy();
+     }) 
 })
