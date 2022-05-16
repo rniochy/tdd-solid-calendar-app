@@ -1,6 +1,7 @@
 import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState, useRef} from "react";
 import './calendar.css'
 import CalendarData from "./CalendarData";
+import CalendarEventSaved from "./CalendarEventSaved";
 import EventDescription from "./EventDescription";
 import HeaderCalendar from "./HeaderCalendar";
 
@@ -11,6 +12,7 @@ import HeaderCalendar from "./HeaderCalendar";
     const [datetDisplay, setDatetDisplay] = useState<number>()
     const [date, setDate] = useState<Date>(new Date())
     const [month, setMonth] = useState<number>(date.getMonth()+1)
+    const [dataInPut, setDataInPut] = useState<string>("")
     const [year, setYear] = useState<number>(date.getFullYear())
     const [currentDay, setCurrentDay] = useState<number>(date.getDate())
   
@@ -43,6 +45,7 @@ import HeaderCalendar from "./HeaderCalendar";
     }
     const handlerClickEvent = (e: React.MouseEvent<HTMLUListElement>): void => {
         clickDayCalendar.current?.focus()
+        setDataInPut(`${e.currentTarget.getAttribute('value')} /${month} /${year}` )
         console.log(`${e.currentTarget.getAttribute('value')} ${month} ${year}` )
     }
     function handlerOnClickChangeData(e: React.MouseEvent<HTMLLIElement> ): void {
@@ -138,16 +141,12 @@ import HeaderCalendar from "./HeaderCalendar";
                     <ul>
                         <dl>Events
                             <ul>
-                                <li>Atual Date</li>
-                                <li>Past Month</li>
-                                <li>Past Year</li>
-                                <li>Atual Date</li>
-                                <li>Atual Date</li>
+                                 <CalendarEventSaved />
                             </ul>
                         </dl>
                     </ul>
                 </aside>
-                    <EventDescription clickDayRef={clickDayCalendar}/>
+                    <EventDescription dataInPut= {dataInPut} clickDayRef={clickDayCalendar}/>
             </div>
     </>
     );

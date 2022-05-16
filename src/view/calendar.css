@@ -20,12 +20,15 @@
 }
 
 .calendarContainer {
-     height: fit-content;
+     height: 15rem;
      padding: 0.5rem;
      border: 1px solid #ccc;   ;
      display:  flex;
      flex-direction: column;
      border-radius: 10px;
+}
+.calendarData {
+      margin-top: 0.5rem;
 }
 .datedisplay {
      align-self: center;
@@ -34,7 +37,7 @@
 .data_month_and_year {
      display: flex;
      flex-direction: column;
-     border-bottom: 1px solid #cecece;
+     border-bottom: 1px solid rgb(206, 206, 206);
 }
 .prev, .next {
       padding: 0.2rem;
@@ -77,8 +80,9 @@
 
 .active {
    padding: 0.2rem;
-   border: 1px solid #ccc;
+   border: 1px solid rgb(204, 204, 204);
    border-radius: 100%;
+   background: rgba(204, 204, 204, 0.5);
 }
 
 li {
@@ -91,9 +95,9 @@ aside {
       display: flex;
       justify-content: center;
 }
-.eventList li {
-      list-style: circle;
-}
+/* .eventList li {
+      background-color: aqua;
+} */
 
 .container  aside:nth-child(1) li {
      height: 1.4rem;
@@ -109,9 +113,7 @@ aside {
      border: 1px solid #666;   
      transition: 500ms ease-in-out;  
 }
-.container  aside:nth-child(3) li {
-      background-color: red;
-}
+
 .form_data {
       display: grid;
       place-items: center;
@@ -121,8 +123,9 @@ aside {
       justify-content: center;
       margin: 0.3rem 0 5.5rem 0;
       grid-column: 1/4;
+      list-style: none;
 }
-form  input {
+form  input, button {
       font-size: 14pt;
       align-self: center;
       height: 1.5rem;
@@ -130,12 +133,62 @@ form  input {
       padding: 0.1rem;
       outline: none;
 }
-form  input[type='text']:focus {
+form  input[type='text']:focus, .labelInputWithText {
       border-bottom: 1px solid #ccc ;
+}
+form  input[placeholder] {
+      font-size: 11pt;
 }
 form  input[type='submit'] {
       padding: 0.4rem;
+      border: 1px solid #cecece;
+}
+button:hover,  input[type='submit']:hover  {
+      background:  rgb(50, 2043, 2043, .6); 
+      transition: 700ms ease-out;
 }
 form legend {
       display: none;
 }
+
+.labelInput {
+      display: inline-block;
+      margin: 1rem 0 0 2rem; 
+      text-align: center;
+}
+label {
+       text-align: center;
+       font-size: 14pt;
+       margin-right: 0.9rem;
+}
+label + input {
+      width: 215px;
+}
+.containerCalendaEventSaved article {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+}
+.containerCalendaEventSaved article:first-child {
+       background-color: rgb(204, 204, 204);
+} 
+.containerCalendaEventSaved article:first-child p:first-child {
+      text-justify: auto;
+      flex-wrap: wrap;
+      height: 2.5rem;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+} 
+.containerCalendaEventSaved article span, span p {
+      font-size: 14pt;
+      width: 100%;
+}
+.containerCalendaEventSaved article .spanButton{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        padding: 2px;
+        column-gap: 0.1rem;
+}
+
