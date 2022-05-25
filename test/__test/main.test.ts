@@ -108,7 +108,7 @@ describe('Should be managment an event in EventManegment', ()=> {
             description:string 
       }
             const createEvent = new EventManegment()
-            expect(createEvent.readEvents()).toBeTruthy()
+            expect(createEvent.readEvents()).toBe([])
      })
      it('should be delete a event', ()=> {
           const createEvent = new EventManegment()

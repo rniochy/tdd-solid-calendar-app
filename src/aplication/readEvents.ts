@@ -1,18 +1,10 @@
 import EventRepository from '../domain/repository/EventRepository'
 
-class ReadEvent {
-
-    constructor(private eventRepository:EventRepository ){
-
-    }   
-    execute({description, date}: TEventDataFormat){
-         
+export default class ReadEvent {
+    constructor(private eventRepository:EventRepository ){}   
+    execute(){
+         return this.eventRepository.readEvents();
      } 
 }
 
 
-type TEventDataFormat =  {
-    id:string,
-    date: Date,
-    description:string 
-}

@@ -1,5 +1,5 @@
 export default interface EventRepository {
-    addEvent( {date, description}: TEventDataFormat):void
+    addEvent(date:Date, description:string):void
     deleteEvent(id: string) : void
     readEvents() : TEventDataFormat[]
     editEvent(pros:TEventDataFormat): void

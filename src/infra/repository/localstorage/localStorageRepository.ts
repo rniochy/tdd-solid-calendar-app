@@ -5,7 +5,7 @@ import EventRepository from "../../../domain/repository/EventRepository";
 const PATH_TO_FILE_JSON = join(resolve(), 'data', '/storedData.json');
 
 export default class LocalStorageRepository implements EventRepository , IIdGenerator{
-    addEvent({ date, description }:TEventDataFormat): void {
+    addEvent(date:Date, description:string): void {
         const id:string = this.idGerator(); 
         const eventToSave = {id, date, description}
         const array_with_events = this.readEvents()
