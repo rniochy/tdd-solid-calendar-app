@@ -1,7 +1,6 @@
-import  {readFile, readFileSync, writeFile, writeFileSync, existsSync} from 'fs'
+import  { readFileSync, writeFileSync} from 'fs'
 import {join, resolve } from 'path'
-import crypto from 'crypto' 
-import { idText } from 'typescript';
+
 
 const PATH_TO_FILE_JSON = join(resolve(), 'test', '__test/events/', 'other.json')
 
@@ -66,7 +65,7 @@ class CalendarApp {
             deleteEvent(id: string): void {             
                   const eventsList: Array<TEventDataFormat> = this.readEvents()
                   const newDataForEventsList = eventsList.filter(events =>  events.id !==  id); 
-                  writeFileSync(PATH_TO_FILE_JSON, JSON.stringify(newDataForEventsList ))
+                  writeFileSync(PATH_TO_FILE_JSON, JSON.stringify(newDataForEventsList))
             }
 
             addEvent({date,description }: TEventDataFormat) : void{ 

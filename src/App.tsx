@@ -1,11 +1,11 @@
 
 import './App.css'
-import Calendar from './view/Calendar'
+import Calendar from './apresentation/Calendar'
 
-function App<React,FC >() {
+function App() {
   return (
     <div className="App">
-      <Calendar/>
+      <Calendar/>  
     </div>
   )
 }
