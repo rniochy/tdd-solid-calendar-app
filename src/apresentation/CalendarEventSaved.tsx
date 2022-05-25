@@ -1,14 +1,23 @@
-import { useState } from "react"
+import ReadEvent from '../aplication/readEvents'
+import LocalStorageRepository from '../infra/repository/localstorage/localStorageRepository'
+import { useEffect, useState } from "react"
 import {BiEdit} from 'react-icons/bi'
 import {MdDelete} from 'react-icons/md'
-
 
 type props = {
      date: string
      description: string
 }
 function CalendarEventSaved() {
- const [arrayFalseData,setArrayFalseData ] = useState<Array<number>>()   
+ const [arrayData,setArrayData ] = useState<TEventDataFormat[]>()   
+
+   useEffect(()=>{
+       const readEvents = new ReadEvent(new LocalStorageRepository())
+       setArrayData(readEvents.execute()) 
+
+   })
+
+   console.log(arrayData)
     const CalendarEvents:React.FC <props> = ({date, description}) => {
         return( 
             <li>
@@ -16,7 +25,8 @@ function CalendarEventSaved() {
                       <article>
                             <span > <p>{`${date}`}</p> <p>{`${description.substring(0, 80)} ...`}</p></span>
                             <div className="spanButton">
-                            <span><MdDelete className="iconButton"/> <p>Delete</p> </span><span><BiEdit className="iconButton"/> Edit</span>
+                             
+                            <span><p><MdDelete className="iconButton"/></p> </span><span><p><BiEdit className="iconButton"/></p></span>
                             </div>      
                       </article>
                 </section>
@@ -40,5 +50,9 @@ function CalendarEventSaved() {
   );
 }
 
-
+type TEventDataFormat =  {
+    id:string,
+    date: Date,
+    description:string 
+}
 export default CalendarEventSaved

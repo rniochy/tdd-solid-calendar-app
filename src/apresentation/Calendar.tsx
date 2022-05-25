@@ -1,9 +1,11 @@
 import React, {DetailedReactHTMLElement, HTMLAttributes, useEffect, useState, useRef} from "react";
-import './calendar.css'
 import CalendarData from "./CalendarData";
 import CalendarEventSaved from "./CalendarEventSaved";
 import EventDescription from "./EventDescription";
 import HeaderCalendar from "./HeaderCalendar";
+import './calendar.css'
+import {BiSun} from 'react-icons/bi'
+import {BiMoon} from 'react-icons/bi'
 
  const  Calendar: React.FC = () => {
     const [dayList, setDayList] = useState<DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>>();
@@ -122,6 +124,10 @@ import HeaderCalendar from "./HeaderCalendar";
 
     return ( 
     <> 
+            <div className="changeThemeContainer">
+                <i className="changeTheme"><BiSun/></i>
+                <i className="changeTheme"><BiMoon/></i>
+            </div>
             <div className="container">
                 <aside>
                     <ul>

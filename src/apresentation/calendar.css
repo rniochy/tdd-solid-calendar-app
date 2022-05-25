@@ -8,8 +8,18 @@
      box-sizing: border-box;
 }
 
+.changeTheme {
+       float:right;
+       margin-right: 1rem;
+       margin-top: 0.5rem;
+}
+.changeThemeContainer {
+       border-bottom: 1px solid #ccc;
+       width: 100%;
+       height: 10vh;
+}
 .container {
-     height: 100vh;
+     height: 90vh;
      width: 100%;
      display: grid;
      grid-template-columns: 1fr 1fr 1fr;
@@ -142,10 +152,6 @@ form  input[type='submit'] {
       grid-column: 3/4;
       grid-row: 1/3;
 }
-.eventList .containerCalendaEventSaved article:hover {
-      transition: ease 300s;
-      transform: scale(4.2);
-}
 button:hover,  input[type='submit']:hover  {
       background:  rgb(50, 2043, 2043, .6); 
       transition: 700ms ease-out;
@@ -153,18 +159,24 @@ button:hover,  input[type='submit']:hover  {
 .spanButton {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 0.3rem;
 }
 .spanButton span {
-       text-align: center;
-       border: 1px solid #ccc;
-       border-radius: 5px;
-       font-size: 12pt;
-       padding: 5px;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 12pt;
+      padding: 3px; 
+      text-indent: 2.5rem;
 }
+.spanButton span:hover {
+       transform: scale(105%);
+} 
 
 .iconButton, .spanButton  {
-       font-size: 16pt;
-       color: aqua;
+      font-size: 16pt;
+      color: #ccc;
 }
 form legend { display: none;}
 
@@ -183,7 +195,7 @@ label + input {width: 215px;}
 .containerCalendaEventSaved {
        width: 13rem;
        margin: 0.2rem;
-       padding: 0.1rem;
+       padding: 0.3rem;
        border-radius: 5px;
        border: 1px solid #ccc;
        box-shadow: 2px 2px 5px #ccc;

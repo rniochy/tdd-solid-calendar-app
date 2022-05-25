@@ -29,6 +29,3 @@ describe('Should be manegment events', ()=>{
      })
 
 })
-
-
-

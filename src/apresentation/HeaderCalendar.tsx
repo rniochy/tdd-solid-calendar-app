@@ -25,5 +25,4 @@ function HeaderCalendar ({datetDisplay,previousMonth, nextMonth,  monthName, yea
 
      )
 }
-
 export default HeaderCalendar
