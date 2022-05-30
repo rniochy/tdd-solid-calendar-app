@@ -48,7 +48,6 @@ import {BiMoon} from 'react-icons/bi'
     const handlerClickEvent = (e: React.MouseEvent<HTMLUListElement>): void => {
         clickDayCalendar.current?.focus()
         setDataInPut(`${e.currentTarget.getAttribute('value')} /${month} /${year}` )
-        console.log(`${e.currentTarget.getAttribute('value')} ${month} ${year}` )
     }
     function handlerOnClickChangeData(e: React.MouseEvent<HTMLLIElement> ): void {
             switch(e.currentTarget.getAttribute('value')){

@@ -6,4 +6,4 @@ const Http = new ExpressAdapter()
 
 new  EventRouter(Http, new LocalStorageRepository())
 
-Http.listen(3001);
+Http.listen(3001)

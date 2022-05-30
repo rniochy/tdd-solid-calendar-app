@@ -6,11 +6,13 @@ export default class EventRoutes implements IEventRouter {
     async eventerRouters(eventRepository: EventRepository): Promise<Router> {
         const router = Router()
         router.post('/createevent', (req: Request,res: Response)=>{
+              const {date, description} = req.body
+             eventRepository.addEvent(date, description)
               res.status(200).send({})
         })
         router.get('/getevent', (req: Request,res: Response)=>{
               const events = eventRepository.readEvents()
-              res.status(200).send({events})
+              res.send({events})
         })
         router.put('/editevent', (req: Request,res: Response)=>{
               const events = eventRepository.editEvent(req.body)
