@@ -15,12 +15,13 @@ export default class EventRoutes implements IEventRouter {
               res.send({events})
         })
         router.put('/editevent', (req: Request,res: Response)=>{
-              const events = eventRepository.editEvent(req.body)
-              res.status(200).send({events})
+              eventRepository.editEvent(req.body)
+              res.status(200).send({msg: "edited"})
         })
-        router.delete('/deleteevent', (req: Request,res: Response)=>{
-              const events = eventRepository.deleteEvent(req.body.id)
-              res.status(200).send({events})
+        router.post('/deleteevent/{id}', (req: Request,res: Response)=>{
+              eventRepository.deleteEvent(req.body.id)
+              console.log(req.body)
+              res.status(200).send({msg: "deleted"})
         })
         return router
     }
