@@ -4,15 +4,20 @@ import {MdDelete} from 'react-icons/md'
 
 const baseUrl = 'http://localhost:5000'
 function CalendarEventSaved() {
- const [arrayData,setArrayData ] = useState<TEventDataFormat[]>([])   
+ const [arrayData,setArrayData ] = useState<TEventDataFormat[]>([]) 
+ const [arrLength, setArrayLength]= useState(arrayData.length)
+ 
 
    useEffect(()=>{
        fetch(`${baseUrl}/event/getevent`).then(res=> res.json()).then(res=>{
        const {events} = res
        setArrayData(events) 
     })
-   },[])
+   },[arrLength])
 
+    async function deleteFunction(id:string){
+        await  fetch(`${baseUrl}/event/deleteevent/${id}`,{method: 'post'})
+   } 
     const CalendarEvents:React.FC <TEventDataFormat> = ({date, description, id}) => {
         return( 
             <li>
@@ -21,7 +26,8 @@ function CalendarEventSaved() {
                             <span ><p>{`${date}`.substring(0,10)}</p> <p>{`${description.substring(0, 80)} ...`}</p></span>
                             <div className="spanButton">
                             <span onClick={async function (){
-                                    fetch(`${baseUrl}/event/deleteevent`,{method: 'post',body: id})
+                                 await   deleteFunction(id)
+                                 setArrayLength(arr=> arr-1)
                             }}>     
                             <p><MdDelete className="iconButton"/></p>
                             

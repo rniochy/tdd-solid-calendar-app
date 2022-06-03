@@ -18,9 +18,9 @@ export default class EventRoutes implements IEventRouter {
               eventRepository.editEvent(req.body)
               res.status(200).send({msg: "edited"})
         })
-        router.post('/deleteevent/{id}', (req: Request,res: Response)=>{
-              eventRepository.deleteEvent(req.body.id)
-              console.log(req.body)
+        router.post('/deleteevent/:id', (req: Request,res: Response)=>{
+              const {id} = req.params
+              eventRepository.deleteEvent(id)
               res.status(200).send({msg: "deleted"})
         })
         return router
