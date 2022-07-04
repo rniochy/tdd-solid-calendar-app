@@ -1,0 +1,10 @@
+.light-mode {
+    --border-grey: rgba(204, 204, 204, 0.5);
+    --black: #000;
+    --content-color: red;
+    --background: #ffffff;
+}
+.dark-mode {
+
+}
+

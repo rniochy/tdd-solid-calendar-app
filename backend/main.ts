@@ -3,7 +3,10 @@ import ExpressAdapter from "./infra/http/expressAdapter";
 import LocalStorageRepository from "./infra/repository/localstorage/localStorageRepository";
 
 const Http = new ExpressAdapter()
+const port =5000 
 
 new  EventRouter(Http, new LocalStorageRepository())
 
-Http.listen(5000)
+console.log(process.env.PORT )
+
+Http.listen(port)

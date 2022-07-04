@@ -30,6 +30,7 @@ export default class LocalStorageRepository implements EventRepository , IIdGene
         return [];
     }
     editEvent({date, description,id}:TEventDataFormat): void {
+        console.log(date, description,id)
         const eventsList: Array<TEventDataFormat> = this.readEvents()  
         const upDateArray = eventsList.filter(event => event.id !== id)   
         const valueToEdit = eventsList.filter(event => event.id === id)

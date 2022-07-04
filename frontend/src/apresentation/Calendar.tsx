@@ -3,9 +3,9 @@ import CalendarData from "./CalendarData";
 import CalendarEventSaved from "./CalendarEventSaved";
 import EventDescription from "./EventDescription";
 import HeaderCalendar from "./HeaderCalendar";
-import './calendar.css'
 import {BiSun} from 'react-icons/bi'
 import {BiMoon} from 'react-icons/bi'
+import './calendar.css'
 
  const  Calendar: React.FC = () => {
     const [dayList, setDayList] = useState<DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>>();
@@ -17,7 +17,6 @@ import {BiMoon} from 'react-icons/bi'
     const [dataInPut, setDataInPut] = useState<string>("")
     const [year, setYear] = useState<number>(date.getFullYear())
     const [currentDay, setCurrentDay] = useState<number>(date.getDate())
-  
     const monthNames:Array<string> = ['January', 'February', 'March',  'April', 'May',
         'June', 'july', 'August',  'September', 'October', 'November', 'December']
 
@@ -146,12 +145,12 @@ import {BiMoon} from 'react-icons/bi'
                     <ul>
                         <dl>Events
                             <ul>
-                                 <CalendarEventSaved />
+                                 <CalendarEventSaved clickDayRef={clickDayCalendar}/>
                             </ul>
                         </dl>
                     </ul>
                 </aside>
-                    <EventDescription dataInPut= {dataInPut} clickDayRef={clickDayCalendar}/>
+                    <EventDescription dataInPut= {dataInPut} clickDayRef={clickDayCalendar} />
             </div>
     </>
     );

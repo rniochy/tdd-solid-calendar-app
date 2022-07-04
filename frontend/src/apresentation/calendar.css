@@ -12,6 +12,7 @@
        float:right;
        margin-right: 1rem;
        margin-top: 0.5rem;
+       color: var(--black);
 }
 .changeThemeContainer {
        border-bottom: 1px solid #ccc;
@@ -27,6 +28,7 @@
      justify-content: center;
      margin-top: 0.4rem;
      position: relative;
+     background-color: var(--background);
 }
 
 .calendarContainer {
@@ -47,7 +49,7 @@
 .data_month_and_year {
      display: flex;
      flex-direction: column;
-     border-bottom: 1px solid rgb(206, 206, 206);
+     border-bottom: 1px solid var(--border-grey);
 }
 .prev, .next {
       padding: 0.2rem;
@@ -89,10 +91,11 @@
 }
 
 .active {
-   padding: 0.2rem;
-   border: 1px solid rgb(204, 204, 204);
-   border-radius: 100%;
-   background: rgba(204, 204, 204, 0.5);
+   text-align: center;
+   padding: 0.1rem;
+   border: 1px solid var(--border-grey);
+   border-radius: 200px;
+   background: var(--border-grey);
 }
 
 li { user-select: none;}
@@ -216,3 +219,5 @@ label + input {width: 215px;}
       margin-top: 15px;
       
 }
+
+/* BACKGROUND*/
