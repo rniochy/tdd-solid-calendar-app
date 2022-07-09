@@ -3,9 +3,8 @@ import CalendarData from "./CalendarData";
 import CalendarEventSaved from "./CalendarEventSaved";
 import EventDescription from "./EventDescription";
 import HeaderCalendar from "./HeaderCalendar";
-import {BiSun} from 'react-icons/bi'
-import {BiMoon} from 'react-icons/bi'
 import './calendar.css'
+import Header from "./Header";
 
  const  Calendar: React.FC = () => {
     const [dayList, setDayList] = useState<DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>>();
@@ -122,12 +121,9 @@ import './calendar.css'
 
     return ( 
     <> 
-            <div className="changeThemeContainer">
-                <i className="changeTheme"><BiSun/></i>
-                <i className="changeTheme"><BiMoon/></i>
-            </div>
+            <Header />
             <div className="container">
-                <aside>
+                <aside className="aside">
                     <ul>
                         <li  value= '1' onClick={handlerOnClickChangeData}>Atual Date</li>
                         <li  value= '2' onClick={handlerOnClickChangeData} >Past Month</li>
@@ -150,7 +146,9 @@ import './calendar.css'
                         </dl>
                     </ul>
                 </aside>
+                <div className="description">
                     <EventDescription dataInPut= {dataInPut} clickDayRef={clickDayCalendar} />
+                </div>
             </div>
     </>
     );

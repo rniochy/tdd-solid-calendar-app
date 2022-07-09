@@ -1,10 +1,21 @@
 .light-mode {
     --border-grey: rgba(204, 204, 204, 0.5);
-    --black: #000;
-    --content-color: red;
-    --background: #ffffff;
+    --content-color:black;
+    --background: #fff;
 }
 .dark-mode {
-
+    --border-grey: rgba(204, 204, 204, 0.5);
+    --content-color: #fff;
+    --background: rgba(0, 0, 0, 0.89);
 }
 
+
+
+
+.App {
+    background-color: var(--background);
+}
+
+body { 
+    background-color: var(--background);
+}

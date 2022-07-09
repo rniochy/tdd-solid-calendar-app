@@ -26,17 +26,21 @@ const EventDescription:React.FC <TProps> = ({clickDayRef, dataInPut}) => {
      }
      return (
             <section className="form_data">
-                <form onSubmit={inputHandler} className="eventDescription" action="#">
+                <form onSubmit={inputHandler} className="eventDescription">
                         <fieldset>
                             <legend>Event Descrition</legend>
-                                <label>Date</label>
-                                <input name="date" className={`labelInput ${`labelInputWithText`}`} type="text" 
-                                    value={dataInPut || ""+eventObject.date } readOnly/>
-                                <br/>
+                               <div>
+                                    <label>Date </label>
+                                        <input name="date" className="labelInput labelInputWithText" type="text" 
+                                            value={dataInPut || ""+eventObject.date } readOnly/>
+                               </div>
+                               <div>
                                 <label>Description</label>
-                                <input  value={description || eventObject.description} 
-                                    onChange={descriptionHandler} name="desciption" ref ={clickDayRef} type="text" 
-                                    placeholder="Describe your event"/> <input  type="submit"  value="Save"/> 
+                                    <input  value={description || eventObject.description} 
+                                        onChange={descriptionHandler} name="desciption" ref ={clickDayRef} type="text" 
+                                        placeholder="Describe your event"/> <input  type="submit"  value="Save"/>
+                               </div>
+ 
                         </fieldset>
                 </form>
         </section>

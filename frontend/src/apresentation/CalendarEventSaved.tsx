@@ -14,7 +14,7 @@ function CalendarEventSaved({clickDayRef}: props) {
         await fetch(`${baseUrl}/event/getevent`).then(res=> res.json()).then(res=>{
             const {events} = res
             setArrayData(events) 
-            }) 
+            })
       })()
 
    },[value])
@@ -49,8 +49,9 @@ function CalendarEventSaved({clickDayRef}: props) {
     }
   return (
           <>
-                {
-                    arrayData.map((value)=> <CalendarEvents key={value.id} id={value.id}
+                { 
+                    arrayData.map((value)=> 
+                        <CalendarEvents key={value.id} id={value.id}
                         date={value.date} 
                         description={value.description} />
                     )
